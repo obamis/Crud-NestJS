@@ -28,14 +28,34 @@ export class UsersService {
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} user`;
+    const index = this.users.findIndex((user)=>user.id ===id)
+
+    return this.users[index]
+
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+    const user = this.findOne(id)
+
+
+    const newUser = {
+      ...user,
+      ...updateUserDto
+    }
+
+    const index = this.users.findIndex(user=>user.id===id)
+    this.users[index] = newUser
+
+    return this.users[index]
   }
 
   remove(id: number) {
-    return `This action removes a #${id} user`
+    const user = this.findOne(id)
+
+    const index = this.users.findIndex(user=>user.id===id)   
+    this.users.splice(index,1)
+
+    return 
+
   }
 }
